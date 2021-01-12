@@ -31,7 +31,7 @@ const Contact = ({ contact, contactKey }) => {
   const deleteContact = () => {
     //: create this method from firebase
     
-    firebase.database().ref(`${user}/contacts/${contactKey}`)
+    firebase.database().ref(`contacts/${user}/${contactKey}`)
     .remove()
     .then(()=>{
       toast("Contact Deleted", {type: 'warning'});
@@ -42,7 +42,7 @@ const Contact = ({ contact, contactKey }) => {
   // update the star/important contact ,ie, star it or unstar the single contact
   const updateImpContact = () => {
     //: update (star) contact, use contactKey
-    firebase.database.ref(`${user}/contacts/${contactKey}`)
+    firebase.database.ref(`contacts/${user}/${contactKey}`)
     .update(
       {
         star : !contact.star

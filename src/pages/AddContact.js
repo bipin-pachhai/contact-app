@@ -32,7 +32,7 @@ import { CONTACT_TO_UPDATE } from "../context/action.types";
 
 import { useHistory } from "react-router-dom";
 
-import { toast } from "react-toastify";
+import {ToastContainer, toast } from "react-toastify";
 
 const AddContact = () => {
   // destructuring state and dispatch from context state
@@ -136,7 +136,7 @@ const AddContact = () => {
   const addContact = async () => {
     //: add contact method
     try {
-      firebase.database().ref(`${user}`+ '/contacts/' + v4())
+      firebase.database().ref('contacts' + `/${user}/` + v4())
       .set({
         name, 
         email,
@@ -156,7 +156,7 @@ const AddContact = () => {
   const updateContact = async () => {
     //: update contact method
     try {
-      firebase.database().ref(`${user}`+ '/contacts/' + contactToUpdateKey)
+      firebase.database().ref( 'contacts' + `/${user}/`+ contactToUpdateKey)
       .set({
         name, 
         email,
@@ -198,6 +198,8 @@ const AddContact = () => {
   // showing the update / add contact based on the  state
   return (
     <Container fluid className="mt-5">
+      <ToastContainer/>
+    
       <Row>
         <Col md="6" className="offset-md-3 p-2">
           <Form onSubmit={handleSubmit}>

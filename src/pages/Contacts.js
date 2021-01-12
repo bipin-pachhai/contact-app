@@ -6,6 +6,7 @@ import { MdAdd } from "react-icons/md";
 import { useHistory } from "react-router-dom";
 import { ContactContext } from "../context/Context";
 import {SET_CONTACT,SET_LOADING ,CONTACT_TO_UPDATE, REMOVE_USER} from "../context/action.types";
+import { ToastContainer,toast } from "react-toastify";
 
 const Contacts = () => {
   const { state, dispatch } = useContext(ContactContext);
@@ -23,7 +24,7 @@ const Contacts = () => {
       type: SET_LOADING,
       payload: true
     })
-    const contactsRef = await firebase.database().ref(`${user}/contacts`);
+    const contactsRef = await firebase.database().ref(`contacts/${user}`);
     contactsRef.on('value', snapshot =>{
       dispatch({
         type: SET_CONTACT,
@@ -42,7 +43,7 @@ const Contacts = () => {
   useEffect(() => {
     //: call methods if needed
     getContacts()
-  }, []);
+  }, [] );
 
   const handleSubmit = (e)=>{
     e.preventDefault();
@@ -51,14 +52,16 @@ const Contacts = () => {
       dispatch({
         type: REMOVE_USER,
       });
+      history.push("/");
     
      
     }).catch((error) => {
       // An error happened.
       console.log(error);
+      toast("Sign out Failed!!", {type: "warning"});
     });
 
-    history.push("/");
+   
 
 
   }
@@ -92,7 +95,7 @@ const Contacts = () => {
     <Container className="mt-4">  
       { user ? <h1>Welcome, {user}</h1>: <h1></h1>}
       <Button onClick = {handleSubmit}> Use another account</Button>
-    
+      <ToastContainer />
       {/* : Loop through FIREBASE objects  */}
       {
         (contacts.length === 0 && !isLoading) ?
