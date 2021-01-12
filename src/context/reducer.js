@@ -5,10 +5,12 @@ import {
   SET_CONTACT,
   SET_LOADING,
   CONTACT_TO_UPDATE,
-  SET_SINGLE_CONTACT
+  SET_SINGLE_CONTACT,
+  SET_USER,
+  REMOVE_USER
 } from "./action.types";
 
-//TODO: use switch case
+// use switch case
 export default (state, action) =>{
   switch (action.type) {
     case SET_CONTACT:
@@ -24,6 +26,12 @@ export default (state, action) =>{
     case SET_SINGLE_CONTACT:
       return {...state,
       contact: action.payload};
+
+    case SET_USER:
+      return {...state, user: action.payload}
+
+    case REMOVE_USER:
+      return{...state, user: null}
   
     default:
       return state;

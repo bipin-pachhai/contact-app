@@ -1,44 +1,34 @@
-import React, { useReducer, useEffect } from "react";
-
-import { Container, Col, Row } from "reactstrap";
-
-// react-router-dom3
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-
+import React, { useContext, useEffect } from "react";
+import { Container,Button } from "reactstrap";
 // react toastify stuffs
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
-// bootstrap css
-import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
-
 // firebase stuffs
 //import firebase config and firebase database
 import {firebaseConfig} from "./utils/config";
 import firebase from "firebase/app";
-import "firebase/database"
-import "firebase/storage"
+import "firebase/auth";
+import "firebase/database";
+import "firebase/storage";
 
 // components
-import AddContact from "./pages/AddContact";
-import Contacts from "./pages/Contacts";
 import Header from "./layout/Header";
 import Footer from "./layout/Footer";
-import ViewContact from "./pages/ViewContact";
-import PageNotFound from "./pages/PageNotFound";
 
 // context api stuffs
 // import reducers and contexts
-import reducer from "./context/reducer";
+import { useHistory } from "react-router-dom";
 import {ContactContext} from "./context/Context";
-import {SET_CONTACT, SET_LOADING} from "./context/action.types";
+import {SET_CONTACT, SET_LOADING, SET_USER} from "./context/action.types";
 //initlizeing firebase app with the firebase config which are in ./utils/firebaseConfig
 //: initialize FIREBASE
 firebase.initializeApp(firebaseConfig);
 
 // first state to provide in react reducer
 const initialState = {
+  user :  null,
+  userPhoto: null,
   contacts: [],
   contact: {},
   contactToUpdate: null,
@@ -47,55 +37,62 @@ const initialState = {
 };
 
 const App = () => {
-  const [state, dispatch] = useReducer(reducer, initialState);
-
+  const { state, dispatch } = useContext(ContactContext);
+  const {user} = state;
+  const history = useHistory();
   // will get contacts from firebase and set it on state contacts array
-  const getContacts = async () => {
-    // : load existing data
-    dispatch({
-      type: SET_LOADING,
-      payload: true
-    })
-    const contactsRef = await firebase.database().ref('/contacts');
-    contactsRef.on('value', snapshot =>{
-      dispatch({
-        type: SET_CONTACT,
-        payload: snapshot.val()
-      });
 
-      dispatch({
-        type: SET_LOADING,
-        payload: false
-      });
-    });
 
-  };
+  
+  const handleSubmit = (e)=>{
+    e.preventDefault();
+    var provider = new firebase.auth.GoogleAuthProvider();
+    firebase.auth()
+        .signInWithPopup(provider)
+        .then((result) => {
+          dispatch({
+              type: SET_USER,
+              payload: result.user?.displayName
+          });
 
-  // getting contact  when component did mount
-  useEffect(() => {
-    //: call methods if needed
-    getContacts()
-  }, []);
+          history.push("/contacts");
+
+          
+    
+        })
+        .catch((error) => {
+         console.log(error);
+        });
+
+       
+        
+    
+  
+
+    
+   
+  }
+
+
+
+
 
   return (
-    <Router>
+    <Container>
       
-      <ContactContext.Provider value = {{state, dispatch}}>
         <ToastContainer />
         <Header />
-        <Container>
-          <Switch>
-            <Route exact path="/contact/add" component={AddContact} />
-            <Route exact path="/contact/view" component={ViewContact} />
-            <Route exact path="/" component={Contacts} />
-            <Route exact path="*" component={PageNotFound} />
-          </Switch>
-        </Container>
+        
+        <div>
+      <h1> Welcome Aboard! Please sign in to view your contacts.</h1>
+      <Button type = "secondary" onClick = {handleSubmit}>Sign in using google account</Button>
+      </div>
+       
 
         <Footer />
-      </ContactContext.Provider>
-    </Router>
-  );
+      
+      </Container>
+        );
 };
 
 export default App;

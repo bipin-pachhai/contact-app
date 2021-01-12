@@ -38,7 +38,7 @@ const AddContact = () => {
   // destructuring state and dispatch from context state
   const { state, dispatch } = useContext(ContactContext);
 
-  const { contactToUpdate, contactToUpdateKey } = state;
+  const {user, contactToUpdate, contactToUpdateKey } = state;
 
   // history hooks from react router dom to send to different page
   const history = useHistory();
@@ -136,7 +136,7 @@ const AddContact = () => {
   const addContact = async () => {
     //: add contact method
     try {
-      firebase.database().ref('contacts/' + v4())
+      firebase.database().ref(`${user}`+ '/contacts/' + v4())
       .set({
         name, 
         email,
@@ -156,7 +156,7 @@ const AddContact = () => {
   const updateContact = async () => {
     //: update contact method
     try {
-      firebase.database().ref('contacts/' + contactToUpdateKey)
+      firebase.database().ref(`${user}`+ '/contacts/' + contactToUpdateKey)
       .set({
         name, 
         email,
@@ -191,7 +191,7 @@ const AddContact = () => {
 
     // after adding/updating contact then sending to the contacts
     // TODO :- also sending when their is any errors
-    history.push("/");
+    history.push("/contacts");
   };
 
   // return the spinner when the image has been added in the storage

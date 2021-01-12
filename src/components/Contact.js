@@ -21,7 +21,8 @@ import { toast } from "react-toastify";
 
 const Contact = ({ contact, contactKey }) => {
   //destructuring dispatch from the context
-  const {dispatch} = useContext(ContactContext);
+  const {state, dispatch} = useContext(ContactContext);
+  const {user} = state;
 
   // history hooks to get history
   const history = useHistory();
@@ -29,7 +30,8 @@ const Contact = ({ contact, contactKey }) => {
   // to delete the contact when delete contact is clicked
   const deleteContact = () => {
     //: create this method from firebase
-    firebase.database().ref(`/contacts/${contactKey}`)
+    
+    firebase.database().ref(`${user}/contacts/${contactKey}`)
     .remove()
     .then(()=>{
       toast("Contact Deleted", {type: 'warning'});
@@ -40,7 +42,7 @@ const Contact = ({ contact, contactKey }) => {
   // update the star/important contact ,ie, star it or unstar the single contact
   const updateImpContact = () => {
     //: update (star) contact, use contactKey
-    firebase.database.ref(`/contacts/${contactKey}`)
+    firebase.database.ref(`${user}/contacts/${contactKey}`)
     .update(
       {
         star : !contact.star
