@@ -4,7 +4,7 @@ import React, { useContext } from "react";
 import { Row, Col } from "reactstrap";
 
 // icons
-import { FaRegStar, FaStar } from "react-icons/fa";
+import { BsHeart, BsFillHeartFill } from "react-icons/bs";
 import { MdDelete, MdEdit } from "react-icons/md";
 
 //add firebase
@@ -18,6 +18,7 @@ import {CONTACT_TO_UPDATE, SET_SINGLE_CONTACT} from "../context/action.types";
 import { useHistory } from "react-router-dom";
 
 import { toast } from "react-toastify";
+import Header from "../layout/Header";
 
 const Contact = ({ contact, contactKey }) => {
   //destructuring dispatch from the context
@@ -42,7 +43,7 @@ const Contact = ({ contact, contactKey }) => {
   // update the star/important contact ,ie, star it or unstar the single contact
   const updateImpContact = () => {
     //: update (star) contact, use contactKey
-    firebase.database.ref(`contacts/${user}/${contactKey}`)
+    firebase.database.ref(`contacts/${user}/${contactKey}/`)
     .update(
       {
         star : !contact.star
@@ -92,9 +93,9 @@ const Contact = ({ contact, contactKey }) => {
         >
           <div className="icon" onClick={() => updateImpContact()}>
             {contact.star ? (
-              <FaStar className=" text-primary" />
+              <BsFillHeartFill className=" text-primary" />
             ) : (
-              <FaRegStar className=" text-info" />
+              <BsHeart className=" text-info" />
             )}
           </div>
         </Col>

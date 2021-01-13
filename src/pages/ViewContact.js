@@ -11,6 +11,7 @@ import {
 } from "reactstrap";
 import { FaEnvelope, FaMapMarkerAlt, FaPhone } from "react-icons/fa";
 import { ContactContext } from "../context/Context";
+import Header from "../layout/Header";
 
 const ViewContact = () => {
   const { state } = useContext(ContactContext);
@@ -19,6 +20,8 @@ const ViewContact = () => {
   //: destructure contact from state
   const {contact} = state;
   return (
+    <>
+    <Header/>
     <Container>
       <Row className="mt-5 mb-5">
         <Col md="5" className="offset-md-3">
@@ -62,6 +65,7 @@ const ViewContact = () => {
         </Col>
       </Row>
     </Container>
+    </>
   );
 };
 

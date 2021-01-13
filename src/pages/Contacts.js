@@ -7,6 +7,7 @@ import { useHistory } from "react-router-dom";
 import { ContactContext } from "../context/Context";
 import {SET_CONTACT,SET_LOADING ,CONTACT_TO_UPDATE, REMOVE_USER} from "../context/action.types";
 import { ToastContainer,toast } from "react-toastify";
+import Header from "../layout/Header";
 
 const Contacts = () => {
   const { state, dispatch } = useContext(ContactContext);
@@ -90,8 +91,9 @@ const Contacts = () => {
   }
 
   return (
-   
-    
+    <>
+    <Header/>
+     
     <Container className="mt-4">  
       { user ? <h1>Welcome, {user}</h1>: <h1></h1>}
       <Button onClick = {handleSubmit}> Use another account</Button>
@@ -116,10 +118,11 @@ const Contacts = () => {
         
           )
       }
-      <MdAdd className="fab icon " onClick={AddContact} />
+      <MdAdd className="fab icon" style={{width:85, height: 85}} onClick={AddContact} />
     </Container>
-   
+    </>
   
+   
   )
 };
 

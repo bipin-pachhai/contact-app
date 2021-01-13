@@ -13,9 +13,10 @@ import ViewContact from "./pages/ViewContact";
 
 
 
+
 const initialState = {
     user :  null,
-    userPhoto: null,
+    userPhoto: "",
     contacts: [],
     contact: {},
     contactToUpdate: null,
@@ -29,7 +30,9 @@ const Routers = ()=>{
 
     return(
         <Router>
+          
            <ContactContext.Provider value = {{state, dispatch}}>
+            
             <Switch>
               <Route exact path="/contact/add" component={AddContact} />
               <Route exact path="/contact/view" component={ViewContact} />
