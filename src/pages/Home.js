@@ -1,5 +1,6 @@
 import React, { useContext} from "react";
 import {Button } from "reactstrap";
+import GoogleLogin from 'react-google-login';
 // react toastify stuffs
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -47,9 +48,13 @@ const Home = () => {
   }
   return (
     <div>    
-     <div>
+     <div >
       <h1> Welcome Aboard! Please sign in to view your contacts.</h1>
-      <Button type = "secondary" onClick = {handleSubmit}>Sign in using google account</Button>
+      <div  className = "buttonCenter" onClick = {handleSubmit}>
+      <GoogleLogin
+          buttonText="Sign in using google account"
+      />
+      </div>
       </div>
     </div>
         );
