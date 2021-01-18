@@ -1,6 +1,6 @@
 
 import React, { useContext } from "react";
-import { Row, Col } from "reactstrap";
+import { Row, Col, Button } from "reactstrap";
 
 // icons
 import { BsHeart, BsFillHeartFill } from "react-icons/bs";
@@ -104,7 +104,7 @@ const Contact = ({ contact, contactKey }) => {
         >
           <img src={contact.picture} alt="" className="img-circle profile" />
         </Col>
-        <Col md="8" onClick={() => viewSingleContact(contact)}>
+        <Col md="7" onClick={() => viewSingleContact(contact)}>
           <div className="text-primary">{contact.name}</div>
 
           <div className="text-secondary">{contact.phoneNumber}</div>
@@ -115,13 +115,14 @@ const Contact = ({ contact, contactKey }) => {
           <div className="text-info">{contact.address}</div>
         </Col>
         <Col
-          md="1"
+          md="2"
           className="d-flex justify-content-center align-items-center "
         >
-          <MdEdit
-            className="icon text-primary ml-2"
+          <Button outline
+            color=" primary"
+            className = "text-primary"
             onClick={() => updateContact()}
-          />
+          >Edit </Button>
 
           <MdDelete
             onClick={() => deleteContact()}
