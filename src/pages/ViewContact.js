@@ -12,6 +12,7 @@ import {
 import { FaEnvelope, FaMapMarkerAlt, FaPhone } from "react-icons/fa";
 import { ContactContext } from "../context/Context";
 import Header from "../layout/Header";
+import Footer from "../layout/Footer";
 
 const ViewContact = () => {
   const { state } = useContext(ContactContext);
@@ -65,6 +66,7 @@ const ViewContact = () => {
         </Col>
       </Row>
     </Container>
+    <Footer/>
     </>
   );
 };

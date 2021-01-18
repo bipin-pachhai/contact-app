@@ -1,4 +1,3 @@
-// https://firebase.google.com/docs/database/web/read-and-write?authuser=1#read_data_once
 
 import React, { useContext } from "react";
 import { Row, Col } from "reactstrap";
@@ -18,7 +17,7 @@ import {CONTACT_TO_UPDATE, SET_SINGLE_CONTACT} from "../context/action.types";
 import { useHistory } from "react-router-dom";
 
 import { toast } from "react-toastify";
-import Header from "../layout/Header";
+
 
 const Contact = ({ contact, contactKey }) => {
   //destructuring dispatch from the context
@@ -35,7 +34,7 @@ const Contact = ({ contact, contactKey }) => {
     firebase.database().ref(`contacts/${user}/${contactKey}`)
     .remove()
     .then(()=>{
-      toast("Contact Deleted", {type: 'warning'});
+      toast("Contact Deleted", {type: 'error'});
     })
     .catch(err => console.log(err))
   };
@@ -43,15 +42,12 @@ const Contact = ({ contact, contactKey }) => {
   // update the star/important contact ,ie, star it or unstar the single contact
   const updateImpContact = () => {
     //: update (star) contact, use contactKey
-    firebase.database.ref(`contacts/${user}/${contactKey}/`)
+    firebase.database().ref(`contacts/${user}/${contactKey}/`)
     .update(
       {
-        star : !contact.star
-      },
-      err => { 
-        console.log(err);
+        'star' : !contact.star
       }
-    )
+    ) 
     .then(()=>{
       toast("Contact updated", {type: 'success'});
     })
@@ -92,9 +88,12 @@ const Contact = ({ contact, contactKey }) => {
           className="d-flex justify-content-center align-items-center"
         >
           <div className="icon" onClick={() => updateImpContact()}>
-            {contact.star ? (
-              <BsFillHeartFill className=" text-primary" />
+            {(contact.star) ? (
+             <BsFillHeartFill className=" text-danger" />
+              
             ) : (
+              
+              
               <BsHeart className=" text-info" />
             )}
           </div>
@@ -117,17 +116,19 @@ const Contact = ({ contact, contactKey }) => {
         </Col>
         <Col
           md="1"
-          className="d-flex justify-content-center align-items-center"
+          className="d-flex justify-content-center align-items-center "
         >
+          <MdEdit
+            className="icon text-primary ml-2"
+            onClick={() => updateContact()}
+          />
+
           <MdDelete
             onClick={() => deleteContact()}
             color="danger"
             className="text-danger icon"
           />
-          <MdEdit
-            className="icon text-info ml-2"
-            onClick={() => updateContact()}
-          />
+          
         </Col>
       </Row>
     </>

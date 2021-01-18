@@ -27,9 +27,8 @@ body {
 .hidden {
   display: none;
 }
-
 .Center {
-  height: 75vh;
+  height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -39,8 +38,7 @@ body {
   margin-top : 3cm;
   margin-left: 40%; 
   justify-content: center;
-  align-items: center;
- 
+  align-items: center; 
 }
 
 .fab {

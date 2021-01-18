@@ -33,7 +33,9 @@ export default (state, action) =>{
       return {...state, userPhoto: action.payload}
 
     case REMOVE_USER:
-      return{...state, user: null}
+      return{...state, user: null, userPhoto: null, contacts: [], contact :{}, contactToUpdate: null,contactToUpdate: null,
+      contactToUpdateKey: null,
+      isLoading: false}
   
     default:
       return state;

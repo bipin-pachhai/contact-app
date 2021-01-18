@@ -1,5 +1,3 @@
-// https://www.npmjs.com/package/browser-image-resizer#asyncawait
-
 import React, { useState, useContext, useEffect } from "react";
 import firebase from "firebase/app";
 
@@ -22,8 +20,6 @@ import { readAndCompressImage } from "browser-image-resizer";
 // add image configurations
 import {imageConfig} from "../utils/config"
 
-import { MdAddCircleOutline } from "react-icons/md";
-
 import { v4 } from "uuid";
 
 // context stuffs
@@ -33,6 +29,8 @@ import { CONTACT_TO_UPDATE } from "../context/action.types";
 import { useHistory } from "react-router-dom";
 
 import {ToastContainer, toast } from "react-toastify";
+import Footer from "../layout/Footer";
+import Header from "../layout/Header";
 
 const AddContact = () => {
   // destructuring state and dispatch from context state
@@ -197,6 +195,8 @@ const AddContact = () => {
   // return the spinner when the image has been added in the storage
   // showing the update / add contact based on the  state
   return (
+    <>
+    <Header/>
     <Container fluid className="mt-5">
       <ToastContainer/>
     
@@ -272,8 +272,8 @@ const AddContact = () => {
                     setStar(!star);
                   }}
                   checked={star}
-                />{" "}
-                <span className="text-right">Mark as Star</span>
+                />{"  "}
+                <span className="text-right">Mark Favorite</span>
               </Label>
             </FormGroup>
             <Button
@@ -287,7 +287,9 @@ const AddContact = () => {
           </Form>
         </Col>
       </Row>
+      <Footer/>
     </Container>
+    </>
   );
 };
 
