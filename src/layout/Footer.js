@@ -10,7 +10,7 @@ const Footer = () => {
       left:0,
 
     }}>
-     Your Favourite Contact Book © All rights reserved.
+     Your Favorite Contact Book © All rights reserved.
     </footer>
   );
 };
