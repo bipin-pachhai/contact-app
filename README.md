@@ -2,6 +2,7 @@
 A web app using React and Firebase that uses Google authentication to add and keep track of contact list under that google account. 
 ### App Walkthrough
 <img src="https://imgur.com/OZjVRqf.gif" width = "800"><br>
+<img src="https://i.imgur.com/KATrvca.gif" width = "800"><br>
 
 
 ### Hightlights
