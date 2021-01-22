@@ -1,7 +1,7 @@
 ## Contact App
 A web app using React and Firebase that uses Google authentication to add and keep track of contact list under that google account. 
 ### App Walkthrough
-<img src="https://picsum.photos/200/300"><br>
+<img src="https://imgur.com/a/kgyrgLi"><br>
 
 ### Hightlights
 1. Signup authentication using google authentication service of firebase.
