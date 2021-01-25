@@ -1,16 +1,17 @@
 ## Contact App
 A web app using React and Firebase that uses Google authentication to add and keep track of contact list under that google account. 
 ### App Walkthrough
-<img src="https://imgur.com/OZjVRqf.gif" width = "800"><br>
+<img src="https://i.imgur.com/ZQmdhAx.gif" width = "800"><br>
 <img src="https://i.imgur.com/KATrvca.gif" width = "800"><br>
 
 
 ### Hightlights
 1. Signup authentication using google authentication service of firebase.
 
-2. Stores contact details and images securely inside firebase realtime database and storage bucket using customized security rules.
+2. Stores users’ contact details and images inside firebase real time database and storage bucket and
+secures them providing access only to the authenticated users.
 
-3. Only the owner of the account can see, add, update, upload pictures, and delete the contacts on his/her list.
+3. Allows users to view, add, update, upload pictures, and delete the contacts of their contact list.
 
  
 ### Installation
